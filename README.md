@@ -9,3 +9,6 @@ run address.py and give it a starting NE address and ending SW address. It will 
 run speedcheck.py to query the addresses with AT&T and will report back if Fiber is available and if not then what other speeds are offered. Numbers returned are 1000,... 0 (0 means no service)
 
 use http://www.easymapmaker.com to create the map from the results file
+
+The code probably needs lots of clean up. I have never programmed in Python until yesterday so forgive me for inaccuracies.
+I am just glad I was able to port this over from the Century Link folks on dslr.
