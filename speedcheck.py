@@ -38,8 +38,8 @@ def test(street, city, zip):
                         speed = re.search("(\d+)",element.text).group(0)
                     else:
                         speed = '0'
-                    print (street+', '+city+', '+state+' '+zip+', '+speed)
-                    f.write(street+', '+city+', '+state+' '+zip+', '+speed+'\n')
+                    print (street+', '+city+', '+state+', '+zip+', '+speed)
+                    f.write(street+', '+city+', '+state+', '+zip+', '+speed+'\n')
                     browser.quit()
                     try_again=False
                     f.close()
