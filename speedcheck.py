@@ -1,4 +1,3 @@
-from multiprocessing import Queue
 from threading import Thread
 from splinter import Browser
 from datetime import datetime
@@ -6,6 +5,7 @@ from datetime import datetime
 import re
 import sys
 import time
+import queue
 
 filename = 'results_'+datetime.now().strftime("%Y-%m-%d")
  
@@ -60,8 +60,9 @@ def run_test(i):
 def do_stuff(q):
     while True:
         run_test(q.get())
+        q.task_done()
  
-q = Queue(maxsize=0)
+q = queue.Queue(maxsize=0)
 num_threads = 5
  
 for i in range(num_threads):
@@ -73,4 +74,5 @@ houses = open('addresses','r')
  
 for x in houses.readlines():
     q.put(x)
- 
+
+q.join()
