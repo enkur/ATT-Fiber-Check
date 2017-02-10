@@ -14,24 +14,22 @@ f.close()
 geocoder = Geocoder()
 
 address_1 = input('Enter first address: ')
-address_2 = input('Enter second address: ')
+radius = float(input('Enter radius to check (meters, 100 min): '))
 
 address_1_coords = geocoder.geocode(address_1).coordinates
-address_2_coords = geocoder.geocode(address_2).coordinates
 
+center_lat=address_1_coords[0]
+center_lon=address_1_coords[1]
 
-
-start_lat=max(address_1_coords[0],address_2_coords[0])
-start_lon=min(address_1_coords[1],address_2_coords[1])
-
-end_lat=min(address_1_coords[0],address_2_coords[0])
-end_lon=max(address_1_coords[1],address_2_coords[1])
+start_lat=center_lat+(radius*0.001/111.3)
+start_lon=center_lon-(radius*0.001/111.3)
+end_lat=center_lat-(radius*0.001/111.3)
+end_lon=center_lon+(radius*0.001/111.3)
 
 sleep_cycle=0
 
 curr_lat = start_lat
 curr_lon = start_lon
-
 
 while curr_lon <= end_lon:
     try:
