@@ -23,7 +23,7 @@ def test(street, city, zip):
         while (try_again):
                 try:
                     f = open(filename,'a')
-                    browser = Browser('chrome')
+                    browser = Browser('phantomjs')
                     url = "https://www.att.com/shop/unified/availability.html"
                     browser.visit(url)
                     browser.find_by_id('streetaddress').fill(street)
@@ -34,12 +34,19 @@ def test(street, city, zip):
                     elif browser.is_text_present('You can get AT&T Fiber at your home', wait_time=10):
                         speed = '1000'
                     elif browser.is_text_present('Mbps', wait_time=10):
-                        element = browser.find_by_xpath('//*[@id="content"]/div/div[1]/div[5]/div[1]/div/div[2]/div[2]/div/span/div/div[2]/p[1]/span')
-                        speed = re.search("(\d+)",element.text).group(0)
+                        if browser.is_text_present('Select the services you’re interested in'):
+                                element = browser.find_by_xpath('//*[@id="offerTilesDiv"]/div[1]/div[1]/div/div[5]/div[2]/div[2]/p[1]/span[2]')
+                                speed = re.search("(\d+)",element.text).group(0)
+                        else:
+                                element = browser.find_by_xpath('//*[@id="content"]/div/div[1]/div[5]/div[1]/div/div[2]/div[2]/div/span/div/div[2]/p[1]/span')
+                                speed = re.search("(\d+)",element.text).group(0)
                     else:
                         speed = '0'
-                    print (street+', '+city+', '+state+', '+zip+', '+speed)
-                    f.write(street+', '+city+', '+state+', '+zip+', '+speed+'\n')
+                    if speed == '0':
+                            print ('bad address')
+                    else:
+                            print (street+', '+city+', '+state+', '+zip+', '+speed)
+                            f.write(street+', '+city+', '+state+', '+zip+', '+speed+'\n')
                     browser.quit()
                     try_again=False
                     f.close()
@@ -63,7 +70,7 @@ def do_stuff(q):
         q.task_done()
  
 q = queue.Queue(maxsize=0)
-num_threads = 5
+num_threads = 8
  
 for i in range(num_threads):
     worker = Thread(target=do_stuff, args=(q,))
