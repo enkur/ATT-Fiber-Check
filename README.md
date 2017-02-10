@@ -6,7 +6,7 @@ https://github.com/mtdoyle/cl_speedcheck
 
 Requires Python 3.6
 splinter package (pip install splinter)
-chrome web driver
+phantomjs web driver
 pygeocoder package (pin install pygeocoder)
 
 run address.py and give it a starting NW address and ending SE address. It will find all the addresses within the box and save it to file called addresses
