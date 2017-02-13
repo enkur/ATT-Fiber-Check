@@ -16,7 +16,7 @@ f.close()
 e = open('bad_addresses','w')
 e.close()
 
-state = 'TX'
+state = input('Enter your State (2 letter): ')
 
 def test(street, city, zip):
         try_again = True
