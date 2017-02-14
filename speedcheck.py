@@ -10,7 +10,7 @@ import queue
 filename = 'results_'+datetime.now().strftime("%Y-%m-%d")
  
 f = open(filename,'w')
-f.write("Street, City, State, Zip, Speed\n")
+f.write("Street, City, State, Zip, emm_lat, emm_lng, emm_acc, Speed\n")
 f.close()
  
 e = open('bad_addresses','w')
@@ -18,7 +18,7 @@ e.close()
 
 state = input('Enter your State (2 letter): ')
 
-def test(street, city, zip):
+def test(street, city, zip, emm_stuff):
         try_again = True
         while (try_again):
                 try:
@@ -45,15 +45,15 @@ def test(street, city, zip):
                     if speed == '0':
                             print ('bad address')
                     else:
-                            print (street+', '+city+', '+state+', '+zip+', '+speed)
-                            f.write(street+', '+city+', '+state+', '+zip+', '+speed+'\n')
+                            print (street+', '+city+', '+state+', '+zip+', '+emm_stuff[0]+', '+emm_stuff[1]+', '+emm_stuff[2]+', '+speed)
+                            f.write(street+', '+city+', '+state+', '+zip+', '+emm_stuff[0]+', '+emm_stuff[1]+', '+emm_stuff[2]+', '+speed+'\n')
                     browser.quit()
                     try_again=False
                     f.close()
                 except:
                     try_again=False
                     e = open('bad_addresses','a')
-                    e.write(street+', '+city+', '+state+' '+zip+'\n')
+                    e.write(street+', '+city+', '+state+' '+emm_stuff[0]+', '+emm_stuff[1]+', '+emm_stuff[2]+', '+zip+'\n')
                     e.close()
                     browser.quit()
                
@@ -62,7 +62,8 @@ def run_test(i):
     street = i.split(',')[0]
     city = i.split(',')[1]
     zip = i.split(',')[2]
-    test(street, city, zip)
+    emm_stuff = i.split(',')[3:]
+    test(street, city, zip, emm_stuff)
 
 def do_stuff(q):
     while True:
@@ -70,7 +71,7 @@ def do_stuff(q):
         q.task_done()
  
 q = queue.Queue(maxsize=0)
-num_threads = 8
+num_threads = 5
  
 for i in range(num_threads):
     worker = Thread(target=do_stuff, args=(q,))
