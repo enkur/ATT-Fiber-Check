@@ -57,10 +57,7 @@ curr_lon = start_lon
 
 while curr_lon <= end_lon:
     try:
-      try:
         results = geocoder.reverse_geocode(curr_lat, curr_lon)
-      except querylimit:
-        print("boo")
         if re.search("^(\d+)$",str(results[0]).split()[0]) is not None:
             l = str(results[0]).split(',')
             addr = ("%s,%s,%s"%(l[0],l[1].strip(),l[2].split()[1]))
