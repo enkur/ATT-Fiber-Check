@@ -4,7 +4,16 @@ program to check where Fiber is available
 Credit to MTdoyle for the original Century Link  speed checker
 https://github.com/mtdoyle/cl_speedcheck
 
-Requires Python 3.6  
+Requires Python 3.6  (3.5 May WORK)
+(tested on FRESH install of ubuntu 16.04 Installed PYTHON3.5, Pip3 and below)
+
+  
+  ```bash
+  sudo apt install python3.5
+  Sudo apt install python3-pip
+  pip3 install splinter
+  pip3 install pygeocoder  #(MAY NEED to use sudo -H pip3 install pygeocoder)
+  ```
   
 If running 
 splinter package (pip install splinter)  
@@ -16,39 +25,6 @@ phantomjs web driver
 ON UBUNTU 16.04 A Script was Found [here](https://gist.github.com/julionc/7476620)
 pygeocoder package (pip install pygeocoder)
 
-```bash
-#!/usr/bin/env bash
-# This script install PhantomJS in your Debian/Ubuntu System
-#
-# This script must be run as root:
-# sudo sh install_phantomjs.sh
-#
-
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
-fi
-
-PHANTOM_VERSION="phantomjs-2.1.1"
-ARCH=$(uname -m)
-
-if ! [ $ARCH = "x86_64" ]; then
-    $ARCH="i686"
-fi
-
-PHANTOM_JS="$PHANTOM_VERSION-linux-$ARCH"
-
-apt-get update
-apt-get -y install build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
-
-cd ~
-wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
-tar xvjf $PHANTOM_JS.tar.bz2
-mv $PHANTOM_JS /usr/local/share/
-ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs
-ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs
-ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
-```
 
 run address.py and give it a starting address and a radius in meters to search within.  
 Starting Address in Quotes "1600 Pennsylvania Ave NW, Washington, DC 20006"
