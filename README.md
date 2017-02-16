@@ -4,14 +4,14 @@ program to check where Fiber is available
 Credit to MTdoyle for the original Century Link  speed checker
 https://github.com/mtdoyle/cl_speedcheck
 
-Requires Python 3.6
-
+Requires Python 3.6  
+  
 If running 
-splinter package (pip install splinter)
-phantomjs web driver
+splinter package (pip install splinter)  
+phantomjs web driver  
 pygeocoder package (pip install pygeocoder)
 
-run address.py and give it a starting address and a radius in meters to search within. 
+run address.py and give it a starting address and a radius in meters to search within.  
 Starting Address in Quotes "1600 Pennsylvania Ave NW, Washington, DC 20006"
 
 These results are written to a file 
