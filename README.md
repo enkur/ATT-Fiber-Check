@@ -9,7 +9,11 @@ requires splinter package (pip install splinter or pip3 install splinter)
 requires pygeocoder package (pip install splinter or pip3 install splinter)  
 Requires Phantomjs Web driver [Original Makers](http://phantomjs.org/)  
   
-  
+You will also need to get Google geocoder API key.
+There is no charge for standard key, follow instructions here
+https://developers.google.com/maps/documentation/geocoding/get-api-key
+
+put the key in the settings.ini file
 
 Ubuntu 16.04 Install Process
 (tested on FRESH install of ubuntu 16.04 Installed PYTHON3.5, Pip3 and below)
