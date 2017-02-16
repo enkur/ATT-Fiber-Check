@@ -1,8 +1,14 @@
 from pygeocoder import Geocoder
+import configparser
+settings = configparser.ConfigParser()
+settings._interpolation = configparser.ExtendedInterpolation()
+settings.read('settings.ini')
+api = settings.get('SectionOne', 'geocodingapi')
 import time
 import re
 import sys
-business_geocoder = Geocoder(api_key='AIzaSyDh1R8rfWeGP62IoI8jAW6uwemSMUuN8jw')
+#business_geocoder = Geocoder(api_key='AIzaSyDh1R8rfWeGP62IoI8jAW6uwemSMUuN8jw')
+business_geocoder = Geocoder(api_key=api)
 
 
 if len(sys.argv) > 1:
