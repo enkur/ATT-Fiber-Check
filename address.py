@@ -7,7 +7,6 @@ api = settings.get('SectionOne', 'geocodingapi')
 import time
 import re
 import sys
-import socks
 import socket
 useproxy = settings.get('SectionOne', 'useproxy')
 useapi = settings.get('SectionOne', 'useapi')
