@@ -7,7 +7,18 @@ api = settings.get('SectionOne', 'geocodingapi')
 import time
 import re
 import sys
-business_geocoder = Geocoder(api_key=api)
+import socks
+import socket
+useproxy = settings.get('SectionOne', 'useproxy')
+useapi = settings.get('SectionOne', 'useapi')
+
+if 'true' in useapi:
+	geocoder = Geocoder(api_key=api) 
+else: 
+	geocoder = Geocoder()
+if 'true' in useproxy:
+	print('boo')
+
 
 
 if len(sys.argv) > 1:
@@ -18,12 +29,18 @@ else:
 f = open(filename,'w')
 f.close()
 
-geocoder = Geocoder()
 
 address_1 = input('Enter first address: ')
 radius = float(input('Enter radius to check (meters, 100 min): '))
 
-address_1_coords = business_geocoder.geocode(address_1).coordinates
+try:
+    address_1_coords = geocoder.geocode(address_1).coordinates
+except:
+    print("API is Overlimit")
+#    socks.setdefaultproxy(proxy_type=socks.PROXY_TYPE_SOCKS5, addr="189.103.137.237", port=46423)
+#    socket.socket = socks.socksocket
+#    address_1_coords = geocoder.geocode(address_1).coordinates
+
 
 center_lat=address_1_coords[0]
 center_lon=address_1_coords[1]
@@ -40,14 +57,14 @@ curr_lon = start_lon
 
 while curr_lon <= end_lon:
     try:
-        results = business_geocoder.reverse_geocode(curr_lat, curr_lon)
+        results = geocoder.reverse_geocode(curr_lat, curr_lon)
         if re.search("^(\d+)$",str(results[0]).split()[0]) is not None:
             l = str(results[0]).split(',')
             addr = ("%s,%s,%s"%(l[0],l[1].strip(),l[2].split()[1]))
             print (addr)
             f = open(filename,'r')
             if addr not in f.read():
-                accurate_coords = business_geocoder.geocode(addr).coordinates
+                accurate_coords = geocoder.geocode(addr).coordinates
                 addr = "%s,%s,%s,ROOFTOP"%(addr,accurate_coords[0], accurate_coords[1])
                 f = open(filename,'a')
                 f.write(addr+"\n")
@@ -63,3 +80,4 @@ while curr_lon <= end_lon:
             sleep_cycle = 0
     except:
         continue
+
