@@ -28,6 +28,8 @@ Ubuntu 16.04 Install Process
   
   pip3 install splinter  
   
+  pip3 install pysocks
+  
   pip3 install pygeocoder  #(MAY NEED to use sudo -H pip3 install pygeocoder)  
   
   chmod +x installphantomjs.sh  

@@ -8,16 +8,40 @@ import time
 import re
 import sys
 import socket
+import csv
+import random
+
+###Pulling Settings
+apiquerylimit = settings.get('SectionOne', 'apiquerylimit')
 useproxy = settings.get('SectionOne', 'useproxy')
 useapi = settings.get('SectionOne', 'useapi')
 
+
+
+##### Setting Variables in the Script. 
 if 'true' in useapi:
 	geocoder = Geocoder(api_key=api) 
 else: 
 	geocoder = Geocoder()
 if 'true' in useproxy:
 	print('boo')
+#else:
+#	socks.setdefaultproxy(proxy_type=socks.PROXY_TYPE_SOCKS5, addr="72.205.210.107", port=23952)
+#	socket.socket = socks.socksocket
 
+
+######## Configuring Proxy Config
+#proxfile = open('proxies.cxv','rt', encoding='utf-8-sig')
+#reader = csv.DictReader(proxfile)
+
+#proxylist = []
+#for row in reader:
+#    proxylist.append(row)
+#def getproxy():
+#
+#countofproxy = len(proxylist)
+#randproxy = random.randint(1,countofproxy)
+#currproxy = proxylist[randproxy)
 
 
 if len(sys.argv) > 1:
