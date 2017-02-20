@@ -25,7 +25,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="address.py" />
-    <Compile Include="Att_Fiber_Check.py" />
     <Compile Include="speedcheck.py" />
   </ItemGroup>
   <ItemGroup>

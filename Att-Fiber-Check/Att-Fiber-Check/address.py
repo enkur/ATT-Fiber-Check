@@ -1,9 +1,9 @@
 from pygeocoder import Geocoder,GeocoderError
 import configparser
-settings = configparser.ConfigParser()
-settings._interpolation = configparser.ExtendedInterpolation()
-settings.read('settings.ini')
-api = settings.get('SectionOne', 'geocodingapi')
+#settings = configparser.ConfigParser()
+#settings._interpolation = configparser.ExtendedInterpolation()
+#settings.read('settings.ini')
+#api = settings.get('SectionOne', 'geocodingapi')
 import time
 import re
 import sys
