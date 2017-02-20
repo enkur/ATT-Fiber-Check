@@ -1,0 +1,14 @@
+BuiltinImporter
+CallableProxyType
+ProxyType
+ReferenceType
+__doc__
+__loader__
+__name__
+__package__
+__spec__
+_remove_dead_weakref
+getweakrefcount
+getweakrefs
+proxy
+ref
