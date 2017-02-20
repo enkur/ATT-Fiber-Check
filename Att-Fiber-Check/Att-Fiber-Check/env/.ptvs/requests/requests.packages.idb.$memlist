@@ -1,0 +1,5 @@
+absolute_import
+urllib3
+idna
+sys
+chardet
