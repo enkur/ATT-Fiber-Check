@@ -166,14 +166,15 @@ if len(latlong) < apiquerylimit:
 count = 0
 while count < apiquerylimit:
     curraddr = test_address(latlong[count][0],latlong[count][1])
-
-    if 'OVER_QUERY_LIMIT' in curraddr:
-        print("OVER LIMIT API, EXITING AND WRITING RESULTS")
-        break
-    else:
-        toberemoved.append(latlong[count])
-        if curraddr is not None:
+    if curraddr is not None:
+        if 'OVER_QUERY_LIMIT' in curraddr:
+            print("OVER LIMIT API, EXITING AND WRITING RESULTS")
+            break
+        else:
+            toberemoved.append(latlong[count])
             completed.append(curraddr)
+    elif curraddr is None:
+        toberemoved.append(latlong[count])
     sleep_cycle = sleep_cycle + 1
     if sleep_cycle == 4:
         time.sleep(1)
