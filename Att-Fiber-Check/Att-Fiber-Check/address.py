@@ -78,11 +78,7 @@ def generate_coords(faddress, sradius):
     thelist = []
     while curr_lon <= end_lon:
         try:
-            #results = geocoder.reverse_geocode(curr_lat, curr_lon)
             thelist.append([curr_lat, curr_lon])
-            #curwork = "%s, %s"%(curr_lat, curr_lon)
-            #f = open(workdone,'a')
-            #f.write(curwork+"\n")
     
             if curr_lat > end_lat:
                 curr_lat = curr_lat - .001
@@ -109,8 +105,7 @@ def test_address(curr_lat, curr_lon):
             return addr
     except GeocoderError:
         print("error: ", GeocoderError.G_GEO_OVER_QUERY_LIMIT)
-        input("Press Enter to exit...")
-        sys.exit()
+        return GeocoderError.G_GEO_OVER_QUERY_LIMIT
     
 
 
@@ -171,9 +166,14 @@ if len(latlong) < apiquerylimit:
 count = 0
 while count < apiquerylimit:
     curraddr = test_address(latlong[count][0],latlong[count][1])
-    toberemoved.append(latlong[count])
-    if curraddr is not None:
-        completed.append(curraddr)
+
+    if 'OVER_QUERY_LIMIT' in curraddr:
+        print("OVER LIMIT API, EXITING AND WRITING RESULTS")
+        break
+    else:
+        toberemoved.append(latlong[count])
+        if curraddr is not None:
+            completed.append(curraddr)
     sleep_cycle = sleep_cycle + 1
     if sleep_cycle == 4:
         time.sleep(1)
