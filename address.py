@@ -1,9 +1,4 @@
 from pygeocoder import Geocoder,GeocoderError
-import configparser
-#settings = configparser.ConfigParser()
-#settings._interpolation = configparser.ExtendedInterpolation()
-#settings.read('settings.ini')
-#api = settings.get('SectionOne', 'geocodingapi')
 import time
 import re
 import sys
@@ -15,7 +10,6 @@ geocoder = Geocoder()
 workdone = "workdone"
 test = "test"
 filename = "addresses"
-testtobedone = "testtobedone"
 toberemoved = []
 
 
@@ -32,18 +26,6 @@ geocoder = Geocoder()
 
 sleep_cycle=0
 
-#if len(sys.argv) > 1:
-#    filename = sys.argv[1]
-#else:
-#    filename = "addresses"
-
-
-
-
-
-#iaddress = ""
-
-#iradius = float(1600)
 def remove_duplicates(list):
     newlist = []
     for i in list:
@@ -142,7 +124,7 @@ else:
     iradius = float(input('Enter radius to check (meters, 100 min): '))
     latlong = generate_coords(iaddress, iradius) 
 
-apiquerylimit = int(input('Api limit (Recommend 1000)'))
+apiquerylimit = int(input('Api limit (Recommend 1000): '))
 #print(latlong)
 
 
@@ -185,11 +167,6 @@ while count < apiquerylimit:
 ####Removes Items We Already Did
 for t in toberemoved:
     latlong.remove(t)
-
-#for t in latlong:
-#    curwork = "%s, %s"%(t[0], t[1])
-#    f = open(testtobedone,'a')
-#    f.write(curwork+"\n")
 
 #### writes the remaining items to file (to be worked on later
 
