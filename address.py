@@ -8,16 +8,12 @@ import os.path
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("--resume","-r",help="Resume Existing job", action="store_true")
-parser.add_argument("--apilimit","-a", help="API Query Limit Default is 1000",type=int)
+parser.add_argument("--resume","-r",help="Resume Existing job and filling in API.  -r 500 (api limit 500)")
+#parser.add_argument("--apilimit","-a", help="API Query Limit Default is 1000",type=int)
 args = parser.parse_args()
 if args.resume:
     shouldcontinue = 'y'
-if args.apilimit:
-    apiquerylimit = args.apilimit
-else: 
-    apiquerylimit = 1000
-
+    apiquerylimi = args.resume
 
 #File Names and Array setup
 geocoder = Geocoder()
@@ -149,6 +145,7 @@ if 'y' in shouldcontinue:
         #file2 = open(workdone,'w')
         #file2.close()
         ###IF the file doesn't exist, it shouldn't go on. 
+        print("Exiting NO files to workwith or no data Cannot Resume")
         sys.exit()
         #f = open(filename,'w')
         #f.close()
