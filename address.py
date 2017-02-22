@@ -38,7 +38,7 @@ def generate_coords(faddress, sradius):
     try:
         address_1_coords = geocoder.geocode(faddress).coordinates
     except GeocoderError as e:
-        print('Geocoder: '+str(e))
+        print('Geocoder: '+ e.args)
         input("Press Enter to exit...")
         sys.exit()
 
@@ -68,9 +68,8 @@ def generate_coords(faddress, sradius):
                 curr_lat = start_lat
                 curr_lon = curr_lon + .001
         except GeocoderError as e:
-            print('Geocoder: '+str(e))
+            print('Geocoder: '+ e.args)
             input("Press Enter to exit...")
-            sys.exit()
     thelist = remove_duplicates(thelist)
     return thelist
 
@@ -85,9 +84,9 @@ def test_address(curr_lat, curr_lon):
             addr = "%s,%s,%s,ROOFTOP"%(addr,accurate_coords[0], accurate_coords[1])
             print (addr)
             return addr
-    except GeocoderError:
-        print("error: ", GeocoderError.G_GEO_OVER_QUERY_LIMIT)
-        return GeocoderError.G_GEO_OVER_QUERY_LIMIT
+    except GeocoderError as e:
+        print("error: ", e.args)
+        return e.args
     
 
 
@@ -110,6 +109,7 @@ if 'y' in shouldcontinue:
         for g in curworking.readlines():
             g = g.strip('\n')
             g = g.strip()
+            g = g.replace(" ", "")
             
             latlong.append(g.split(','))
 
