@@ -1,2 +1,0 @@
-pygeocoder==1.2.5
-requests==2.13.0
