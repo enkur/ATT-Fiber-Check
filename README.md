@@ -63,6 +63,12 @@ It again asks for API Limit.  For a new day, new 1000.
 
 The rest follows the normal path
 
+**CRONJOB Argument**
+If you want to schedule this you can in Ubuntu an Example job could be 
+@daily /usr/bin/screen /usr/bin/python3.5 /home/(yourusername)/ATT-Fiber-Check/address.py -r 1000  
+The Number can be changed to whatever your api limit is. 
+
+
 python3.5 speedcheck.py
 
 It will ask for the state.  Type in the 2 Letter State
