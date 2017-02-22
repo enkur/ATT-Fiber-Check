@@ -45,7 +45,7 @@ screen python3.5 address.py (recommended to use screen based off the NEW functio
 
 Starting Address in Quotes "1600 Pennsylvania Ave NW, Washington, DC 20006"
 
-It will ask a range, Valid answers are 100-1600 (Meters: 1600 Meters is 1 Mile **A Duh Moment but This is why you use screen for LARGE areas)
+It will ask a range, Valid answers are 100-*(I do not know have tested 3200+) (Meters: 1600 Meters is 1 Mile **A Duh Moment but This is why you use screen for LARGE areas)
 
 It then calculates the Coords based off the "math" **TM**
 
