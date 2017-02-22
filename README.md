@@ -77,10 +77,10 @@ I am just glad I was able to port this over from the Century Link folks on dslr.
 Anyone is welcome to modify and improve the code.
 
 
-**FAQ**
-by ze Budman
-1. Why no Proxy or socks I see it in Previous commits.  
-  *I looked into it, It appears difficult to get a routine list, and I felt that it was bad form to skirt the limits by google.  I like to call this working within the restraints.
+**FAQ**  
+by ze Budman  
+1. Why no Proxy or socks I see it in Previous commits.
+  + I looked into it, It appears difficult to get a routine list, and I felt that it was bad form to skirt the limits by google.  I like to call this working within the restraints.
 2. Why?
-  *I wanted to learn python I enjoyed learning it, either going to work with another user on the Java phantom js or fix up the speedtest.py next. 
+  + I wanted to learn python I enjoyed learning it, either going to work with another user on the Java phantom js or fix up the speedtest.py next. 
 
