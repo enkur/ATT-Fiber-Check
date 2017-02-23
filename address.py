@@ -110,8 +110,9 @@ def test_address(curr_lat, curr_lon):
     except GeocoderError as e:
         print("error: ", e.args)
         return e.args
-    
-
+    except IndexError:
+        #Probably missing zip code
+        return None
 
     
 ###IF we don't do this we get duplicates in the list and that just causes more API Hits. 
