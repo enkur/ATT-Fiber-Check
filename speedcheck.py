@@ -29,6 +29,10 @@ def test(street, city, zip, emm_stuff):
                     browser.find_by_id('streetaddress').fill(street)
                     browser.find_by_id('zipcode').fill(zip)
                     browser.find_by_xpath('//*[@id="content"]/div/div[2]/div[1]/div/div/div/form/div[2]/input').first.click()
+                    if browser.is_text_present('I want to select my apartment', wait_time=10):
+                        browser.choose('selectAddressOption','2')
+                        browser.choose('subAddressList','0')
+                        browser.find_by_xpath('//*[@id="content"]/div/div[3]/div/div[3]/p/a').first.click() 
                     if browser.is_text_present('your home qualifies for AT&T Fiber', wait_time=10):
                         speed = '1000'
                     elif browser.is_text_present('You can get AT&T Fiber at your home', wait_time=10):
