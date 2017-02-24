@@ -29,8 +29,7 @@ geocoder = Geocoder(api_key=geocoderApiKey)
 
 #File Names and Array setup
 workdone = "workdone"
-test = "test"
-filename = "addresses.csv"
+filename = "addresses"
 toberemoved = []
 latlong = []
 completed = []
