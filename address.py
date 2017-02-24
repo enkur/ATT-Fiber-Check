@@ -4,28 +4,35 @@ import re
 import sys
 import random
 import os.path
-##The Args the Args Thank God for the args (CronJob Ho!)
-
 import argparse
+import configparser
+
+# Read in settings from settings.ini file
+settings = configparser.ConfigParser()
+settings.read('settings.ini')
+
+# The Args the Args Thank God for the args (CronJob Ho!)
 parser = argparse.ArgumentParser()
 parser.add_argument("--resume","-r",help="Resume Existing job and filling in API.  -r 500 (api limit 500)")
-#parser.add_argument("--apilimit","-a", help="API Query Limit Default is 1000",type=int)
 args = parser.parse_args()
 if args.resume:
     shouldcontinue = 'y'
-    apiquerylimi = args.resume
+    apiquerylimit = args.resume
+
+# Setup Geocoder using the API key if this has been enabled in settings.  If not, assume no API key
+geocoderApiKey=None
+if 'true' in settings.get('Address', 'useapi'):
+    geocoderApiKey = settings.get('Address', 'geocodingapi')
+    print ('Using API Key')
+geocoder = Geocoder(api_key=geocoderApiKey)
+
 
 #File Names and Array setup
-geocoder = Geocoder()
 workdone = "workdone"
-test = "test"
 filename = "addresses"
 toberemoved = []
 latlong = []
 completed = []
-
-#making it not casesensitive basically
-geocoder = Geocoder()
 
 
 #This function removes duplicates from any array that comes into it.  Handy to reduce API Query 
@@ -123,6 +130,12 @@ def remove_duplicates(list):
             newlist.append(i)
     return newlist
 
+
+###
+### Begin Main Program Logic Here
+###
+
+
 ###Add a Resume Function here
 try:
     shouldcontinue
@@ -140,16 +153,12 @@ if 'y' in shouldcontinue:
             g = g.replace(" ", "")
             
             latlong.append(g.split(','))
+        curworking.close()
 
     else:
-        #print("file Doesn't Exist")
-        #file2 = open(workdone,'w')
-        #file2.close()
         ###IF the file doesn't exist, it shouldn't go on. 
         print("Exiting NO files to workwith or no data Cannot Resume")
         sys.exit()
-        #f = open(filename,'w')
-        #f.close()
 else:
     iaddress = input('Enter first address: ')
     iradius = float(input('Enter radius to check (meters, 100 min): '))
@@ -204,18 +213,17 @@ for t in toberemoved:
 
 #### writes the remaining items to file (to be worked on later
 
-remakefile = open('workdone','w')
-remakefile.close()
+workDoneFile = open('workdone','w')
 for t in latlong:
     curwork = "%s, %s"%(t[0], t[1])
-    f = open(workdone,'a')
-    f.write(curwork+"\n")
+    workDoneFile.write(curwork+"\n")
+workDoneFile.close()
 
 completed = remove_duplicates(completed)
 
 #### writes the new completed addresses.
+f = open(filename,'a')
 for t in completed:
     addressoutput = "%s"%(t)
-    #f = open(test,'a')
-    f = open(filename,'a')
     f.write(addressoutput+"\n")
+f.close()
