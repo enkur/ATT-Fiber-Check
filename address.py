@@ -4,28 +4,36 @@ import re
 import sys
 import random
 import os.path
-##The Args the Args Thank God for the args (CronJob Ho!)
-
 import argparse
+import configparser
+
+# Read in settings from settings.ini file
+settings = configparser.ConfigParser()
+settings.read('settings.ini')
+
+# The Args the Args Thank God for the args (CronJob Ho!)
 parser = argparse.ArgumentParser()
 parser.add_argument("--resume","-r",help="Resume Existing job and filling in API.  -r 500 (api limit 500)")
-#parser.add_argument("--apilimit","-a", help="API Query Limit Default is 1000",type=int)
 args = parser.parse_args()
 if args.resume:
     shouldcontinue = 'y'
-    apiquerylimi = args.resume
+    apiquerylimit = args.resume
+
+# Setup Geocoder using the API key if this has been enabled in settings.  If not, assume no API key
+geocoderApiKey=None
+if 'true' in settings.get('Address', 'useapi'):
+    geocoderApiKey = settings.get('Address', 'geocodingapi')
+    print ('Using API Key')
+geocoder = Geocoder(api_key=geocoderApiKey)
+
 
 #File Names and Array setup
-geocoder = Geocoder()
 workdone = "workdone"
 test = "test"
 filename = "addresses"
 toberemoved = []
 latlong = []
 completed = []
-
-#making it not casesensitive basically
-geocoder = Geocoder()
 
 
 #This function removes duplicates from any array that comes into it.  Handy to reduce API Query 
@@ -122,6 +130,12 @@ def remove_duplicates(list):
         if i not in newlist:
             newlist.append(i)
     return newlist
+
+
+###
+### Begin Main Program Logic Here
+###
+
 
 ###Add a Resume Function here
 try:
