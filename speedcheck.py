@@ -1,10 +1,12 @@
 from threading import Thread
+from threading import RLock
 from datetime import datetime
 
 import json
 import queue
 import urllib.request
 
+fileLock=RLock()
 filename = 'results_'+datetime.now().strftime("%Y-%m-%d")
  
 f = open(filename,'w')
@@ -22,7 +24,6 @@ def test(street, city, zip, emm_stuff):
     try_again = True
     while (try_again):
         try:
-            f = open(filename,'a')
             url = "https://www.att.com/services/shop/model/ecom/shop/view/unified/qualification/service/CheckAvailabilityRESTService/invokeCheckAvailability"
             postdata = json.dumps({
                 'userInputZip': zip,
@@ -47,19 +48,22 @@ def test(street, city, zip, emm_stuff):
                     line = '%s, %s, %s, %s, %s, %s, %s, %s' % \
                         (street, city, state, zip, emm_stuff[0], emm_stuff[1], emm_stuff[2], speed)
                     print(line)
-                    f.write(line + '\n')
+                    with fileLock:
+                        f = open(filename,'a')
+                        f.write(line + '\n')
+                        f.close()
             else:
                 print('Availability check returned HTTP status %d' % resp.getcode())
 
             try_again=False
-            f.close()
 
         except Exception as x:
             print(x)
             try_again=False
-            e = open('bad_addresses','a')
-            e.write(street+', '+city+', '+state+' '+emm_stuff[0]+', '+emm_stuff[1]+', '+emm_stuff[2]+', '+zip+'\n')
-            e.close()
+            with fileLock:
+                e = open('bad_addresses','a')
+                e.write(street+', '+city+', '+state+' '+emm_stuff[0]+', '+emm_stuff[1]+', '+emm_stuff[2]+', '+zip+'\n')
+                e.close()
                
 def run_test(i):
     i = i.strip()
@@ -87,4 +91,5 @@ houses = open('addresses','r')
 for x in houses.readlines():
     q.put(x)
 
+houses.close()
 q.join()
