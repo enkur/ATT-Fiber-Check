@@ -5,9 +5,7 @@ Credit to MTdoyle for the original Century Link  speed checker
 https://github.com/mtdoyle/cl_speedcheck
 
 Requires Python 3.6  (3.5 WILL WORK)  
-requires splinter package (pip install splinter or pip3 install splinter)  
 requires pygeocoder package (pip install splinter or pip3 install splinter)  
-Requires Phantomjs Web driver [Original Makers](http://phantomjs.org/)  
   
 This script has been modified to handle LARGE swaths of land.  It has been coded to work in a defined API Limit and to stop on the hit.  Google has a limit of 2,500 hits per IP.  The script (address.py) **HITS TWICE FOR EACH SUCCESSFUL MATCH**  First to get a general address, then to get the "accurate" address.  When the API is hit, OR the API Limit you specify is hit it will write the changes and addresses to workdone (the Geocords) and addresses (the file that speedcheck uses).
 
@@ -25,15 +23,9 @@ Ubuntu 16.04 Install Process
   
   Sudo apt install python3-pip  
   
-  pip3 install splinter  
-  
   pip3 install pygeocoder  #(MAY NEED to use sudo -H pip3 install pygeocoder)  
   
-  chmod +x installphantomjs.sh  
-  
-  sudo ./installphantomjs.sh
   ```
-ON UBUNTU 16.04 A Script was Found [here](https://gist.github.com/julionc/7476620) This script was made by [gautiermichelin](https://gist.github.com/gautiermichelin) props to him 
 
 Running the Program
 
