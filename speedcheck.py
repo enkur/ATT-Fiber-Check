@@ -7,7 +7,7 @@ import queue
 import urllib.request
 
 fileLock=RLock()
-filename = 'results_'+datetime.now().strftime("%Y-%m-%d")
+filename = 'results_'+datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
  
 f = open(filename,'w')
 f.write("Street, City, State, Zip, emm_lat, emm_lng, emm_acc, Speed\n")
@@ -67,6 +67,11 @@ def test(street, city, zip, emm_stuff):
                
 def run_test(i):
     i = i.strip()
+
+    if len(i.split(',')) < 4:
+        print('Input is incorrect for {}'.format(i))
+        return
+
     street = i.split(',')[0]
     city = i.split(',')[1]
     zip = i.split(',')[2]
