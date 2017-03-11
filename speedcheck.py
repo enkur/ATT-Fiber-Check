@@ -67,6 +67,11 @@ def test(street, city, zip, emm_stuff):
                
 def run_test(i):
     i = i.strip()
+
+    if len(i.split(',')) < 4:
+        print('Input is incorrect for {}'.format(i))
+        return
+
     street = i.split(',')[0]
     city = i.split(',')[1]
     zip = i.split(',')[2]
