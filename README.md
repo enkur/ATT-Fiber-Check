@@ -82,3 +82,41 @@ by ze Budman
 2. Why?
   + I wanted to learn python I enjoyed learning it, either going to work with another user on the Java phantom js or fix up the speedtest.py next. 
 
+********************************************************************************************************************************
+Windows step by step instructions (tested on Windows 10 and 7)
+Here are the instructions to install in Windows... Ill add these to the GIT page as well
+
+1. Install python (select option to add to PATH)
+    download client from here https://www.python.org/ftp/python/3.6.3/python-3.6.3-amd64.exe
+
+2. Open command line prompt (cmd.exe)
+    type "python" to make sure its working... type "exit ()"
+
+3. install pygeocoder by running
+    pip3 install pygeocoder
+
+4. Download GIT zip file from this address
+   click on clone/Download
+https://github.com/enkur/ATT-Fiber-Check
+
+5. Unzip in any directory
+
+6. on the command prompt change to the script directory where you unzipped in step 5
+
+7. run the address.py as
+    python address.py
+
+8. Type no for new run and enter information as requested.
+
+9. Once 8 completes there will be a new file called "addresses"
+
+10. run speedcheck.py
+     python speedcheck.py
+
+11. Once step 10 finishes it will create a file called "results_<date>"
+      open it in excel as a csv file
+
+12. go to www.easymapmaker.com and paste the excel worksheet. click on "Set Options" and in the "Group" option select "Speed" 
+     click make map and you are done.
+
+
