@@ -84,7 +84,6 @@ by ze Budman
 
 ********************************************************************************************************************************
 Windows step by step instructions (tested on Windows 10 and 7)
-Here are the instructions to install in Windows... Ill add these to the GIT page as well
 
 1. Install python (select option to add to PATH)
     download client from here https://www.python.org/ftp/python/3.6.3/python-3.6.3-amd64.exe
